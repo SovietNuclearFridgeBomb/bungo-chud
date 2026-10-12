@@ -1968,6 +1968,7 @@ export class Player implements AbstractObject {
                         : math.lerp(Math.random(), 0.8, 1.2);
                     createCasingParticle(
                         this.m_action.item,
+                        false,
                         shellAngle,
                         shellSpeedMult,
                         this.m_pos,
