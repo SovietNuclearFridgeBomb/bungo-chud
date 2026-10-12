@@ -43,6 +43,7 @@ export interface BulletParams {
     splinter?: boolean;
     apRounds?: boolean;
     highVelocity?: boolean;
+    quietRounds?: boolean;
     combatStims?: boolean;
     shotAlt?: boolean;
     trailSaturated?: boolean;
@@ -154,6 +155,7 @@ export class Bullet {
     splinter!: boolean;
     apRounds!: boolean;
     highVelocity!: boolean;
+    quietRounds!: boolean;
     combatStims!: boolean;
     trailSaturated!: boolean;
     trailSmall!: boolean;
@@ -249,6 +251,7 @@ export class Bullet {
         this.splinter = params.splinter ?? false;
         this.apRounds = params.apRounds ?? false;
         this.highVelocity = params.highVelocity ?? false;
+        this.quietRounds = params.quietRounds ?? false;
         this.combatStims = params.combatStims ?? false;
         this.trailSaturated = params.trailSaturated ?? false;
         this.trailSmall = params.trailSmall ?? false;
@@ -275,6 +278,7 @@ export class Bullet {
             || this.splinter
             || this.apRounds
             || this.highVelocity
+            || this.quietRounds
             || this.combatStims
             || this.trailSaturated
             || this.trailSmall
@@ -685,6 +689,7 @@ export class Bullet {
             splinter: this.splinter,
             apRounds: this.apRounds,
             highVelocity: this.highVelocity,
+            quietRounds: this.quietRounds,
             combatStims: this.combatStims,
             trailSaturated: this.trailSaturated,
             trailSmall: this.trailSmall,
