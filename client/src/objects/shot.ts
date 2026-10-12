@@ -21,10 +21,12 @@ interface Shot {
     trailSaturated?: boolean;
     apRounds?: boolean;
     highVelocity?: boolean;
+	quietRounds?: boolean
 }
 
 export function createCasingParticle(
     weapType: string,
+	hasQuietRounds: boolean,
     casingAngle: number,
     casingSpeedMult: number,
     pos: Vec2,
@@ -51,6 +53,34 @@ export function createCasingParticle(
         if (weapDef.particle.shellReverse) {
             vel = v2.mul(vel, -1);
         }
+		if (weapDef.name == "Bugle" && hasQuietRounds) {
+		shellDir = v2.rotate(dir, -0.7);
+		vel = v2.mul(shellDir, casingSpeedMult * 11.5);
+        vel = v2.rotate(vel, ((Math.random() - 0.5) * Math.PI) / 3);
+		particleBarn.addParticle(
+            "bugle_weak_1",
+            layer,
+            shellPos,
+            vel,
+            weapDef.particle.shellScale,
+            -Math.atan2(shellDir.y, shellDir.x),
+            null,
+            zOrd,
+        );
+		shellDir = v2.rotate(dir, 0.7);
+		vel = v2.mul(shellDir, casingSpeedMult * 11.5);
+        vel = v2.rotate(vel, ((Math.random() - 0.5) * Math.PI) / 3);
+		particleBarn.addParticle(
+            "bugle_weak_2",
+            layer,
+            shellPos,
+            vel,
+            weapDef.particle.shellScale,
+            -Math.atan2(shellDir.y, shellDir.x),
+            null,
+            zOrd,
+        );
+		} else {
         particleBarn.addParticle(
             weapDef.particle.casing ?? weapDef.ammo,
             layer,
@@ -61,6 +91,7 @@ export function createCasingParticle(
             null,
             zOrd,
         );
+		}
     }
 }
 export class ShotBarn {
@@ -96,6 +127,7 @@ export class ShotBarn {
         shot.trailSaturated = bullet.trailSaturated;
         shot.apRounds = bullet.apRounds;
         shot.highVelocity = bullet.highVelocity;
+		shot.quietRounds = bullet.quietRounds;
     }
 
     m_update(
@@ -136,18 +168,7 @@ export class ShotBarn {
                     } else if (shot.splinter) {
                         detune = -300;
                     }
-
-                    audioManager.playSound(shotSound, {
-                        channel: shot.playerId == activePlayerId
-                            ? "activePlayer"
-                            : "otherPlayers",
-                        soundPos: shot.pos,
-                        layer: player ? player.layer : shot.layer,
-                        filter: "muffled",
-                        fallOff: weaponDef.sound.fallOff ? weaponDef.sound.fallOff : 0,
-                        detune,
-                        volumeScale: shot.splinter ? 0.75 : 1,
-                    });
+					
 
                     if (shot.splinter) {
                         audioManager.playSound(shotSound, {
@@ -161,7 +182,7 @@ export class ShotBarn {
                                 ? weaponDef.sound.fallOff
                                 : 0,
                             detune: 1200,
-                            delay: 30,
+                            delay: 0,
                             volumeScale: 0.75,
                         });
                     }
@@ -178,7 +199,7 @@ export class ShotBarn {
                                 ? weaponDef.sound.fallOff
                                 : 0,
                             detune: 1000,
-                            delay: 45,
+                            delay: 0,
                             volumeScale: 0.75,
                         });
                     }
@@ -194,10 +215,40 @@ export class ShotBarn {
                                 ? weaponDef.sound.fallOff
                                 : 0,
                             detune: 800,
-                            delay: 10,
+                            delay: 0,
                             volumeScale: 2,
                         });
                     }
+					
+					if (shot.quietRounds) {
+                        audioManager.playSound(shotSound, {
+                            channel: shot.playerId == activePlayerId
+                                ? "activePlayer"
+                                : "otherPlayers",
+                            soundPos: shot.pos,
+                            layer: player ? player.layer : shot.layer,
+                            fallOff: weaponDef.sound.fallOff
+                                ? weaponDef.sound.fallOff
+                                : 0,
+                            detune: -300,
+                            delay: 0,
+                            volumeScale: 0.5,
+                        });
+                    }
+					
+					if (!shot.splinter&&!shot.apRounds&&!shot.highVelocity&&!shot.quietRounds) {
+                    audioManager.playSound(shotSound, {
+                        channel: shot.playerId == activePlayerId
+                            ? "activePlayer"
+                            : "otherPlayers",
+                        soundPos: shot.pos,
+                        layer: player ? player.layer : shot.layer,
+                        filter: "muffled",
+                        fallOff: weaponDef.sound.fallOff ? weaponDef.sound.fallOff : 0,
+                        detune,
+                        volumeScale: shot.splinter ? 0.75 : 1,
+                    });
+					}
 
                     if (player) {
                         // If it's our shot, play a cycling or pull sound if needed
@@ -239,6 +290,7 @@ export class ShotBarn {
                     ) {
                         createCasingParticle(
                             shot.weaponType,
+							shot.quietRounds,
                             (Math.PI / 2) * -1,
                             1,
                             player.m_netData.m_pos,
