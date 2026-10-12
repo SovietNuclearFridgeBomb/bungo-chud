@@ -42,6 +42,9 @@ export const PerkProperties = {
         armorPenetration: 0.8,
         obstacleMult: 1.5,
     },
+	quiet_rounds: {
+		
+	},
     trick_size: {
         scale: 0.25,
     },
@@ -95,7 +98,7 @@ export const PerkProperties = {
         speedBoost: 1,
     },
     combat_stims: {
-        bonusDamageMult: 1.15,
+        bonusDamageMult: 1.12,
         healPercent: 0.06,
         effectDuration: 5,
     },
@@ -127,13 +130,8 @@ export const PerkProperties = {
     },
     bonus_9mm: {
         spreadMul: 1.1,
-        speedMult: 1.2,
-        distanceMult: 1.2,
-    },
-    bonus_45: {
-        empoweredChance: 0.166,
-        empoweredDamageMult: 1.25,
-        empoweredSpeedMult: 1.2,
+        speedMult: 1.25,
+        distanceMult: 1.25,
     },
     rare_potato: {
         quality: 1,
@@ -162,7 +160,7 @@ export const PerkProperties = {
         "12gauge": ["treat_12g"],
         "45acp": ["bonus_45"],
     } as Record<string, string[]>,
-    ammoBonusDamageMult: 1.12,
+    ammoBonusDamageMult: 1.08,
     // Classless perk list (effectively all class perks in Cobalt, minus martyrdom)
     classless: {
         perkPool: [
@@ -330,6 +328,20 @@ export const PerkDefs: Record<string, PerkDef> = {
     },
     splinter: {
         name: "Splinter Rounds",
+        type: "perk",
+        lootImg: {
+            sprite: "loot-perk-splinter.img",
+            tint: 0xffffff,
+            border: "loot-circle-outer-03.img",
+            borderTint: 0xffffff,
+            scale: 0.275,
+        },
+        sound: {
+            pickup: "perk_pickup_01",
+        },
+    },
+	quiet_rounds: {
+        name: "Suppressed Rounds",
         type: "perk",
         lootImg: {
             sprite: "loot-perk-splinter.img",
@@ -662,7 +674,7 @@ export const PerkDefs: Record<string, PerkDef> = {
         },
         sound: { pickup: "perk_pickup_01" },
     },
-    final_bugle: {
+    inspiration: {
         name: "Last Breath",
         type: "perk",
         lootImg: {
