@@ -2078,10 +2078,10 @@ const ParticleDefs: Record<string, ParticleDef> = {
         color: 0xffe866,
     },
 	bugle_weak_2: {
-        image: ["part-note-02.img"],
+        image: ["part-note-03.img"],
         life: new Range(1.25, 1.3),
         drag: new Range(3, 4),
-        rotVel: new Range(Math.PI * 1, Math.PI * 1),
+        rotVel: new Range(Math.PI * -1, Math.PI * -1),
         scale: {
             start: 0.07,
             end: 0.074,
