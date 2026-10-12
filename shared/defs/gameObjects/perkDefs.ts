@@ -353,7 +353,7 @@ export const PerkDefs: Record<string, PerkDef> = {
         name: "Suppressed Rounds",
         type: "perk",
         lootImg: {
-            sprite: "loot-perk-quiet.img",
+            sprite: "loot-perk-quiet-rounds.img",
             tint: 0xffffff,
             border: "loot-circle-outer-03.img",
             borderTint: 0xffffff,
