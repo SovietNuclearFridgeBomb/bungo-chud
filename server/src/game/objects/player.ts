@@ -4576,7 +4576,7 @@ export class Player extends BaseGameObject {
             if (player.teamId == GameConfig.FactionTeam.Blue && player.__id != this.__id) {
                 this.game.playerBarn.addEmote("emote_bugle_inspiration_blue", player.__id);
             }
-		} else {
+		}} else {
 			for (const player of affectedPlayers) {
             player.giveHaste(GameConfig.HasteType.Inspire, PerkProperties.inspiration.hasteDuration - 1);
         }
