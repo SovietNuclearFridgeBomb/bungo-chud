@@ -811,6 +811,7 @@ export class WeaponManager {
         const hasSplinter = this.player.hasPerk("splinter");
         const hasApRounds = this.player.hasPerk("ap_rounds");
         const hasHighVelocity = this.player.hasPerk("high_velocity");
+        const hasQuietRounds = this.player.hasPerk("quiet_rounds");
         const hasCombatStims = this.player.combatStimsActive;
         const shouldApplyChambered = this.player.hasPerk("chambered")
             && itemDef.ammo !== "12gauge"
@@ -940,6 +941,7 @@ export class WeaponManager {
                 splinter: hasSplinter,
                 apRounds: hasApRounds,
                 highVelocity: hasHighVelocity,
+                quietRounds: hasQuietRounds,
                 combatStims: hasCombatStims,
                 lastShot: weapon.ammo <= 0,
                 reflectObjId: this.player.obstacleOutfit?.__id,
