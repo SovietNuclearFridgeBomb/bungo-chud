@@ -246,7 +246,7 @@ export class ShotBarn {
                         filter: "muffled",
                         fallOff: weaponDef.sound.fallOff ? weaponDef.sound.fallOff : 0,
                         detune,
-                        volumeScale: shot.splinter ? 0.75 : 1,
+                        volumeScale: 1,
                     });
 					}
 
