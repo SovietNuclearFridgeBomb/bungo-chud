@@ -48,6 +48,10 @@ export const PerkProperties = {
     trick_size: {
         scale: 0.25,
     },
+	inspiration: {
+		effectRange: 30,
+		hasteDuration: 3,
+	},
     final_bugle: {
         bonusDamageMult: 1.08,
         scaleOnDeath: 0.2,
