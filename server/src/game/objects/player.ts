@@ -4574,7 +4574,7 @@ export class Player extends BaseGameObject {
                 this.game.playerBarn.addEmote("emote_bugle_inspiration_red", player.__id);
             }
             if (player.teamId == GameConfig.FactionTeam.Blue && player.__id != this.__id) {
-                this.game.playerBarn.addEmote("emote_bugle_inspiration_blue",player.__id,);
+                this.game.playerBarn.addEmote("emote_bugle_inspiration_blue", player.__id);
             }
 		} else {
 			for (const player of affectedPlayers) {
