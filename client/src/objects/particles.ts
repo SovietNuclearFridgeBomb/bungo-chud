@@ -2060,6 +2060,40 @@ const ParticleDefs: Record<string, ParticleDef> = {
         },
         color: 0xffda00,
     },
+    bugle_weak_1: {
+        image: ["part-note-02.img"],
+        life: new Range(1.25, 1.3),
+        drag: new Range(3, 4),
+        rotVel: new Range(Math.PI * 1, Math.PI * 1),
+        scale: {
+            start: 0.07,
+            end: 0.074,
+            lerp: new Range(0, 1),
+        },
+        alpha: {
+            start: 0.8,
+            end: 0,
+            lerp: new Range(0.5, 1),
+        },
+        color: 0xffe866,
+    },
+	bugle_weak_2: {
+        image: ["part-note-02.img"],
+        life: new Range(1.25, 1.3),
+        drag: new Range(3, 4),
+        rotVel: new Range(Math.PI * 1, Math.PI * 1),
+        scale: {
+            start: 0.07,
+            end: 0.074,
+            lerp: new Range(0, 1),
+        },
+        alpha: {
+            start: 0.8,
+            end: 0,
+            lerp: new Range(0.5, 1),
+        },
+        color: 0xffe866,
+    },
     fragPin: {
         image: ["part-frag-pin-01.img"],
         life: new Range(0.5, 0.5),
