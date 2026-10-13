@@ -4562,25 +4562,23 @@ export class Player extends BaseGameObject {
     playBugle(): void {
         this.bugleTickerActive = true;
         this._bugleTicker = 8;
-
-        const affectedPlayers = this.game.modeManager.getNearbyAlivePlayersContext(
-            this,
-            PerkProperties.inspiration.effectRange,
-        );
-		if (!this.hasPerk("quiet_rounds")) {
-        for (const player of affectedPlayers) {
-            player.giveHaste(GameConfig.HasteType.Inspire, PerkProperties.inspiration.hasteDuration);
-            if (player.teamId == GameConfig.FactionTeam.Red && player.__id != this.__id) {
-                this.game.playerBarn.addEmote("emote_bugle_inspiration_red", player.__id);
+        if (!this.hasPerk("quiet_rounds")) {
+            const affectedPlayers = this.game.modeManager.getNearbyAlivePlayersContext(this, PerkProperties.inspiration.effectRange);
+            for (const player of affectedPlayers) {
+                player.giveHaste(GameConfig.HasteType.Inspire, PerkProperties.inspiration.hasteDuration);
+                if (player.teamId == GameConfig.FactionTeam.Red && player.__id != this.__id) {
+                    this.game.playerBarn.addEmote("emote_bugle_inspiration_red", player.__id);
+                }
+                if (player.teamId == GameConfig.FactionTeam.Blue && player.__id != this.__id) {
+                    this.game.playerBarn.addEmote("emote_bugle_inspiration_blue", player.__id);
+                }
             }
-            if (player.teamId == GameConfig.FactionTeam.Blue && player.__id != this.__id) {
-                this.game.playerBarn.addEmote("emote_bugle_inspiration_blue", player.__id);
+        } else {
+            const affectedPlayers = this.game.modeManager.getNearbyAlivePlayersContext(this, PerkProperties.inspiration.effectRange - 10);
+            for (const player of affectedPlayers) {
+                player.giveHaste(GameConfig.HasteType.Inspire, PerkProperties.inspiration.hasteDuration - 1);
             }
-		}} else {
-			for (const player of affectedPlayers) {
-            player.giveHaste(GameConfig.HasteType.Inspire, PerkProperties.inspiration.hasteDuration - 1);
         }
-		}
     }
 
     incrementFat() {
